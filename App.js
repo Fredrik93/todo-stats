@@ -5,7 +5,7 @@ import TodoScreen from './Screens/TodoScreen';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text} >Open up Appdd.js!</Text>
+      <Text style={styles.text} >Open up App.js!</Text>
       <StatusBar style="auto" />
       <TodoScreen />
     </View>
