@@ -1,12 +1,19 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
+import { TouchableOpacity } from 'react-native-web';
 import Todo from '../Components/Todo'
 
 const TodoScreen = () => {
+    var list = [<Todo title="some" />,
+    <Todo title="Clean #1" key="1" />,
+    <Todo title="Vacuum #2" key="2" />,
+    <Todo title="Math #3" key="3" />];
     return <View>
-        <Todo title="todo #1" />
-        <Todo title="todo #2" />
-        <Todo title="todo #3" />
+
+        {list.map(item =>
+            <li key={item.key}>{item}</li>,
+
+        )}
 
     </View>
 }
