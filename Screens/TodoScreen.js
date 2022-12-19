@@ -4,16 +4,13 @@ import { TouchableOpacity } from 'react-native-web';
 import Todo from '../Components/Todo'
 
 const TodoScreen = () => {
-    var list = [<Todo title="some" />,
-    <Todo title="Clean #1" key="1" />,
-    <Todo title="Vacuum #2" key="2" />,
-    <Todo title="Math #3" key="3" />];
-    return <View>
 
-        {list.map(item =>
-            <li key={item.key}>{item}</li>,
-
-        )}
+    return
+    <View>
+        <Todo title="some" />
+        <Todo title="Clean" />
+        <Todo title="Vacuum" />
+        <Todo title="Math" />
 
     </View>
 }

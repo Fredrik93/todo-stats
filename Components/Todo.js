@@ -1,24 +1,19 @@
 import React, { Fragment } from 'react'
-import { StyleSheet, Text } from 'react-native'
-import { Button, TouchableOpacity } from 'react-native-web'
+import { StyleSheet, Text, Image, TextBase } from 'react-native'
+
 
 const Todo = (props) => {
+
+    console.log(props)
     return (
-        <Fragment  >
-            <div  >
-                <Text style={styles.text} > {props.title}
-                </Text>
-                <Button title="X" onPress={() => { console.log(`clicked + ${props.title}`) }} />
-            </div>
-        </Fragment>)
+        <Text > Text: {props.title}</Text>
+
+    )
 }
 
 const styles = StyleSheet.create({
-    text: {
-        marginBottom: 2,
-        borderColor: 'black',
-        borderWidth: 1
-    }
+
+
 })
 
 export default Todo;
