@@ -1,23 +1,29 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
-import { TouchableOpacity } from 'react-native-web';
+import { StyleSheet, View } from 'react-native'
 import Todo from '../Components/Todo'
-
+import InputForm from '../Components/InputForm';
+import { FlatList, Text } from 'react-native-web';
 const TodoScreen = () => {
     const listy = ["vacuum", "clean"]
-    const [list, setTodo] = useState(listy)
+    const [tasks, setTasks] = useState([]);
 
-    const displayList = list.map((item) => {
-        return <li key={item + "lal"} >
-            <Todo title={item} />
 
-        </li>
-    })
+    const handleAddTask = (newTask) => {
+        setTasks([...tasks, { id: Date.now().toString(), text: newTask }]);
+    };
+
     return (
         <View>
-            <ol>{displayList}</ol>
-
-            <Button title="Add" onPress={() => { setTodo([...list, "hi"]) }} />
+            <FlatList
+                data={tasks}
+                keyExtractor={(item) => item.id.toString()}  // Ensure this is a unique string
+                renderItem={({ item }) => (
+                    <View style={styles.taskItem}>
+                        <Text>{item.text}</Text>
+                    </View>
+                )}
+            />
+            <InputForm onAddTask={handleAddTask} />
         </View>)
 }
 
