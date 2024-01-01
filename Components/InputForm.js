@@ -1,18 +1,25 @@
 // InputForm.js
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
 const InputForm = ({ onAddTask }) => {
   const [task, setTask] = useState('');
+  const inputRef = useRef(null); // Create a ref for the TextInput
 
   const handleAddTask = () => {
+    //if input is empty, dont save item 
     if (task.trim() !== '') {
       onAddTask(task);
       setTask('');
+      inputRef.current.focus(); // Set focus back to the input
+
     }
   };
-
+  const handleDemoAddTask = () => {
+    onAddTask("test-task");
+    setTask('');
+  };
   return (
     <View style={styles.container}>
       <TextInput
@@ -20,8 +27,14 @@ const InputForm = ({ onAddTask }) => {
         placeholder="Add a new task"
         value={task}
         onChangeText={(text) => setTask(text)}
+        onSubmitEditing={handleAddTask}  // Handle Enter key press
+        ref={inputRef} // Attach the ref to the TextInput
+
+
       />
       <Button title="Add" onPress={handleAddTask} />
+      <Button title="Demo Add" onPress={handleDemoAddTask} />
+
     </View>
   );
 };
