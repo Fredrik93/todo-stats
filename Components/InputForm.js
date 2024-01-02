@@ -1,6 +1,6 @@
 // InputForm.js
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
 const InputForm = ({ onAddTask }) => {
@@ -12,14 +12,28 @@ const InputForm = ({ onAddTask }) => {
     if (task.trim() !== '') {
       onAddTask(task);
       setTask('');
-      inputRef.current.focus(); // Set focus back to the input
+      focusInput(); // Refocus after task is added
 
     }
   };
   const handleDemoAddTask = () => {
     onAddTask("test-task");
     setTask('');
+    focusInput(); // Refocus after task is added
+
   };
+
+  const focusInput = () => {
+    inputRef.current && inputRef.current.focus();
+  };
+
+  useEffect(() => {
+    focusInput();
+    // Optionally, add an event listener for when the app comes into focus
+    // This might be overkill depending on your app's structure
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+
   return (
     <View style={styles.container}>
       <TextInput
