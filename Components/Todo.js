@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import CheckBox from './CheckBox';
 
 
 const Todo = ({ title }) => {
     return (
         <View style={styles.todoItem}>
-            <CheckBox />
             <Text style={styles.title}>{title}</Text>
-
+            <CheckBox />
             {/* You can add checkbox and delete button components here */}
         </View>
     );
