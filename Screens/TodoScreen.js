@@ -8,21 +8,25 @@ const TodoScreen = () => {
 
 
     const handleAddTask = (newTask) => {
-        setTasks([...tasks, { id: Date.now().toString(), text: newTask }]);
+        setTasks([{ id: Date.now().toString(), text: newTask }, ...tasks]);
     };
+    const handleDelete = (taskId) => {
+        setTasks(tasks.filter(task => task.id !== taskId));
+    };
+
     return (
         <View>
-            <View style={styles.inputBackground}>
+            <View style={styles.inputFormBackground}>
                 <InputForm onAddTask={handleAddTask} />
             </View>
-            <View style={styles.screenBackground}>
+            <View style={styles.taskBackground}>
 
                 <FlatList
-                    data={tasks.reverse()}
+                    data={tasks}
                     keyExtractor={(item) => item.id.toString()}  // Ensure this is a unique string
                     renderItem={({ item }) => (
                         <View style={styles.taskItem}>
-                            <Todo title={item.text} />
+                            <Todo title={item.text} onDelete={() => { handleDelete(item.id) }} />
                         </View>
                     )}
                 />
@@ -38,14 +42,16 @@ const styles = StyleSheet.create({
         borderWidth: 10
 
     },
-    screenBackground: {
+    taskBackground: {
+
         backgroundColor: '#fff', // Set a white background color
         borderRadius: 10, // Set a value for rounded corners (adjust as needed)
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', // Add a subtle box shadow for a modern look
         padding: 20, // Add padding for better visual appeal
         margin: 10, // Add margin to create space around the component
     },
-    inputBackground: {
+    inputFormBackground: {
+
         backgroundColor: '#fff', // Set a white background color
         borderRadius: 10, // Set a value for rounded corners (adjust as needed)
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', // Add a subtle box shadow for a modern look

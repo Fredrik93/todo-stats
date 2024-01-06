@@ -1,7 +1,7 @@
 // InputForm.js
 
 import React, { useState, useRef, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Dimensions } from 'react-native';
 
 const InputForm = ({ onAddTask }) => {
   const [task, setTask] = useState('');
@@ -34,6 +34,7 @@ const InputForm = ({ onAddTask }) => {
   }, []); // Empty dependency array ensures this runs only once on mount
 
 
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -53,12 +54,14 @@ const InputForm = ({ onAddTask }) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: 10,
+
   },
   input: {
     flex: 1,

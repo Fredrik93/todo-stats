@@ -1,16 +1,15 @@
 import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-const CheckBox = () => {
-    const [isChecked, setChecked] = useState(false);
+const CheckBox = ({ isChecked, onCheck }) => {
 
     return (
         <View style={styles.section}>
             <Checkbox
                 style={styles.checkbox}
                 value={isChecked}
-                onValueChange={setChecked}
+                onValueChange={onCheck}
                 color={isChecked ? '#4630EB' : undefined}
             />
         </View>

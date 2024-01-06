@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import CheckBox from './CheckBox';
+import DeleteTask from './DeleteTask';
 
 
-const Todo = ({ title }) => {
+const Todo = ({ title, onDelete }) => {
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleCheck = (newCheckValue) => {
+        setIsChecked(newCheckValue);
+    };
+
     return (
         <View style={styles.todoItem}>
-            <Text style={styles.title}>{title}</Text>
-            <CheckBox />
-            {/* You can add checkbox and delete button components here */}
+            <Text style={[styles.title, isChecked && styles.checkedTitle]}>{title}</Text>
+            <CheckBox isChecked={isChecked} onCheck={handleCheck} />
+
+            <DeleteTask onDelete={onDelete} />
         </View>
     );
 };
@@ -26,7 +33,10 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 18,
     },
-    // Add styles for checkbox and delete button here
+    checkedTitle: {
+        color: '#505050',
+        textDecorationLine: 'line-through',
+    }
 });
 
 export default Todo;
