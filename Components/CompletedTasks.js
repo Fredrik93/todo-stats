@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { FlatList } from "react-native-web";
 import Todo from "./Todo";
 
-const CompletedTasks = ({ completedTasks }) => {
+const CompletedTasks = ({ completedTasks, title, onToggleComplete, onDelete }) => {
     const listOfCompletedTasks = <FlatList
         data={completedTasks}
         keyExtractor={(item) => item.id.toString()}  // Ensure this is a unique string

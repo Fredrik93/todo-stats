@@ -4,8 +4,8 @@ import CheckBox from './CheckBox';
 import DeleteTask from './DeleteTask';
 
 
-const Todo = ({ title, onToggleComplete, onDelete }) => {
-    const [isChecked, setIsChecked] = useState(false);
+const Todo = ({ title, onToggleComplete, isCheckedInitially, onDelete }) => {
+    const [isChecked, setIsChecked] = useState(isCheckedInitially);
 
     const handleCheck = (newCheckValue) => {
         setIsChecked(newCheckValue);

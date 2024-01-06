@@ -4,6 +4,7 @@ import Todo from '../Components/Todo'
 import InputForm from '../Components/InputForm';
 import { FlatList } from 'react-native-web';
 import CompletedTasks from '../Components/CompletedTasks';
+import TaskList from '../Components/TaskList';
 const TodoScreen = () => {
     const [tasks, setTasks] = useState([]);
     const [completedTasks, setCompletedTasks] = useState([]);
@@ -30,24 +31,17 @@ const TodoScreen = () => {
                 <InputForm onAddTask={handleAddTask} />
             </View>
             <View style={styles.taskBackground}>
-
-                <FlatList
-                    data={tasks}
-                    keyExtractor={(item) => item.id.toString()}  // Ensure this is a unique string
-                    renderItem={({ item }) => (
-                        <View style={styles.taskItem}>
-                            <Todo
-                                title={item.text}
-                                onToggleComplete={(isCompleted) => handleToggleComplete(item.id, isCompleted)}
-                                onDelete={() => {
-                                    handleDelete(item.id)
-                                }} />
-                        </View>
-                    )}
+                <TaskList
+                    tasks={tasks}
+                    onToggleComplete={handleToggleComplete}
+                    onDelete={handleDelete}
                 />
             </View>
-            <CompletedTasks completedTasks={completedTasks} />
-
+            <TaskList
+                tasks={completedTasks}
+                onToggleComplete={handleToggleComplete}
+                onDelete={handleDelete}
+            />
         </View>)
 }
 
