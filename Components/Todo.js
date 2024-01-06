@@ -4,11 +4,13 @@ import CheckBox from './CheckBox';
 import DeleteTask from './DeleteTask';
 
 
-const Todo = ({ title, onDelete }) => {
+const Todo = ({ title, onToggleComplete, onDelete }) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const handleCheck = (newCheckValue) => {
         setIsChecked(newCheckValue);
+        onToggleComplete(newCheckValue);  // Inform the parent component
+
     };
 
     return (
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     checkedTitle: {
-        color: '#505050',
+        color: '#333333',
         textDecorationLine: 'line-through',
     }
 });

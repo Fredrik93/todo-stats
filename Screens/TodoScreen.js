@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Todo from '../Components/Todo'
 import InputForm from '../Components/InputForm';
-import { FlatList, Text } from 'react-native-web';
+import { FlatList } from 'react-native-web';
+import CompletedTasks from '../Components/CompletedTasks';
 const TodoScreen = () => {
     const [tasks, setTasks] = useState([]);
+    const [completedTasks, setCompletedTasks] = useState([]);
 
 
     const handleAddTask = (newTask) => {
@@ -12,6 +14,14 @@ const TodoScreen = () => {
     };
     const handleDelete = (taskId) => {
         setTasks(tasks.filter(task => task.id !== taskId));
+    };
+    const handleToggleComplete = (taskId, isCompleted) => {
+        if (isCompleted) {
+            setCompletedTasks([...completedTasks, tasks.find(task => task.id === taskId)]);
+            setTasks(tasks.filter(task => task.id !== taskId));
+        } else {
+            // Logic to move back to active tasks if needed
+        }
     };
 
     return (
@@ -26,11 +36,18 @@ const TodoScreen = () => {
                     keyExtractor={(item) => item.id.toString()}  // Ensure this is a unique string
                     renderItem={({ item }) => (
                         <View style={styles.taskItem}>
-                            <Todo title={item.text} onDelete={() => { handleDelete(item.id) }} />
+                            <Todo
+                                title={item.text}
+                                onToggleComplete={(isCompleted) => handleToggleComplete(item.id, isCompleted)}
+                                onDelete={() => {
+                                    handleDelete(item.id)
+                                }} />
                         </View>
                     )}
                 />
             </View>
+            <CompletedTasks completedTasks={completedTasks} />
+
         </View>)
 }
 

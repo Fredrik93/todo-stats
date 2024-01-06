@@ -6,7 +6,7 @@ import { View, TextInput, Button, StyleSheet, Dimensions } from 'react-native';
 const InputForm = ({ onAddTask }) => {
   const [task, setTask] = useState('');
   const inputRef = useRef(null); // Create a ref for the TextInput
-
+  const [counter, setCounter] = useState(0)
   const handleAddTask = () => {
     //if input is empty, dont save item 
     if (task.trim() !== '') {
@@ -17,10 +17,11 @@ const InputForm = ({ onAddTask }) => {
     }
   };
   const handleDemoAddTask = () => {
-    onAddTask("test-task");
+
+    onAddTask("test-task " + counter);
     setTask('');
     focusInput(); // Refocus after task is added
-
+    setCounter(counter + 1)
   };
 
   const focusInput = () => {
